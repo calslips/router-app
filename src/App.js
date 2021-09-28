@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Switch, Route, Link, Redirect, useParams, useHistory
 } from 'react-router-dom';
 
 const Home = () => (
@@ -11,12 +11,27 @@ const Home = () => (
   </div>
 );
 
+const Note = ({notes}) => {
+  const id = useParams().id;
+  const note = notes.find((n) => n.id === Number(id));
+
+  return (
+    <div>
+      <h2>{note.content}</h2>
+      <div>{note.user}</div>
+      <div><strong>{note.important ? 'important' : ''}</strong></div>
+    </div>
+  );
+};
+
 const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
     <ul>
       {notes.map(note =>
-        <li key={note.id}>{note.content}</li>
+        <li key={note.id}>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+        </li>
       )}
     </ul>
   </div>
@@ -33,6 +48,31 @@ const Users = () => (
     </ul>
   </div>
 );
+
+const Login = (props) => {
+  const history = useHistory();
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    props.onLogin('tmnt');
+    history.push('/');
+  };
+
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username: <input />
+        </div>
+        <div>
+          password: <input type='password' />
+        </div>
+        <button type='submit'>login</button>
+      </form>
+    </div>
+  );
+};
 
 const App = () => {
   const [notes, setNotes] = useState([
@@ -56,32 +96,47 @@ const App = () => {
     }
   ]);
 
+  const [user, setUser] = useState(null);
+
+  const login = (user) => {
+    setUser(user);
+  };
+
   const padding = {
     padding: 5
   };
 
   return (
     <div>
-    <Router>
-      <div>
-        <Link style={padding} to='/'>home</Link>
-        <Link style={padding} to='notes'>notes</Link>
-        <Link style={padding} to='users'>users</Link>
-      </div>
+      <Router>
+        <div>
+          <Link style={padding} to='/'>home</Link>
+          <Link style={padding} to='notes'>notes</Link>
+          <Link style={padding} to='users'>users</Link>
+          {user
+            ? <em>{user} logged in</em>
+            : <Link style={padding} to='/login'>login</Link>
+          }
+        </div>
 
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route path='/notes'>
-          <Notes notes={notes}/>
-        </Route>
-        <Route path='/users'>
-          <Users />
-        </Route>
-      </Switch>
-
-    </Router>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/notes/:id'>
+            <Note notes={notes} />
+          </Route>
+          <Route path='/notes'>
+            <Notes notes={notes}/>
+          </Route>
+          <Route path='/users'>
+            {user ? <Users /> : <Redirect to='/login' />}
+          </Route>
+          <Route path='/login'>
+            <Login onLogin={login} />
+          </Route>
+        </Switch>
+      </Router>
       <div>
         <br />
         <em>Note app, Department of Computer Science 2021</em>
