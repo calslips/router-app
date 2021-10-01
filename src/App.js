@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Switch, Route, Link, Redirect, useHistory, useRouteMatch
 } from 'react-router-dom';
-import { /*Table, Form, Button, Alert,*/ Nav, Navbar } from 'react-bootstrap'
+// import { Table, Form, Button, Alert, Nav, Navbar } from 'react-bootstrap'
 import {
   Container,
   Button,
@@ -12,7 +12,10 @@ import {
   TableContainer,
   TableRow,
   TextField,
-  Paper
+  Paper,
+  AppBar,
+  Toolbar,
+  IconButton
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
@@ -142,28 +145,24 @@ const App = () => {
   return (
     <Container>
       {message && <Alert severity='success'>{message}</Alert>}
-      <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav'>
-          <Nav className='mr-auto'>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/'>home</Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/notes'>notes</Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              <Link style={padding} to='/users'>users</Link>
-            </Nav.Link>
-            <Nav.Link href='#' as='span'>
-              {user
-                ? <em style={padding}>{user} logged in</em>
-                : <Link style={padding} to='/login'>login</Link>
-              }
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+      <AppBar position='static'>
+        <Toolbar>
+          <IconButton edge='start' color='inherit' aria-label='menu' ></IconButton>
+          <Button color='inherit' component={Link} to='/'>
+            home
+          </Button>
+          <Button color='inherit' component={Link} to='/notes'>
+            notes
+          </Button>
+          <Button color='inherit' component={Link} to='/users'>
+            users
+          </Button>
+          {user
+            ? <em>{user} logged in</em>
+            : <Button color='inherit' component={Link} to='/login'>login</Button>
+          }
+        </Toolbar>
+      </AppBar>
 
       <Switch>
         <Route exact path='/'>
