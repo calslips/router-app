@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {
   Switch, Route, Link, Redirect, useHistory, useRouteMatch
 } from 'react-router-dom';
-import { /*Table, Form, Button,*/ Alert, Nav, Navbar } from 'react-bootstrap'
+import { /*Table, Form, Button, Alert,*/ Nav, Navbar } from 'react-bootstrap'
 import {
   Container,
   Button,
@@ -14,6 +14,7 @@ import {
   TextField,
   Paper
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 
 const Home = () => (
   <div>
@@ -140,7 +141,7 @@ const App = () => {
 
   return (
     <Container>
-      {message && <Alert variant='success'>{message}</Alert>}
+      {message && <Alert severity='success'>{message}</Alert>}
       <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse id='responsive-navbar-nav'>
