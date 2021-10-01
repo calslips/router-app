@@ -3,6 +3,7 @@ import {
   Switch, Route, Link, Redirect, useHistory, useRouteMatch
 } from 'react-router-dom';
 import { Table, Form, Button, Alert, Nav, Navbar } from 'react-bootstrap'
+import Container from '@material-ui/core/Container';
 
 const Home = () => (
   <div>
@@ -129,7 +130,7 @@ const App = () => {
     : null;
 
   return (
-    <div className='container'>
+    <Container>
       {message && <Alert variant='success'>{message}</Alert>}
       <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
@@ -176,7 +177,7 @@ const App = () => {
         <br />
         <em>Note app, Department of Computer Science 2021</em>
       </div>
-    </div>
+    </Container>
   );
 };
 
