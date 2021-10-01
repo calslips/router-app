@@ -3,17 +3,17 @@ import {
   Switch, Route, Link, Redirect, useHistory, useRouteMatch
 } from 'react-router-dom';
 import {
-  Container,
+  // Container,
   // Button,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
-  TextField,
+  // TextField,
   Paper,
-  AppBar,
-  Toolbar,
+  // AppBar,
+  // Toolbar,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import styled from 'styled-components';
@@ -29,6 +29,22 @@ const Button = styled.button`
 
 const Input = styled.input`
   margin: 0.25em;
+`;
+
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`;
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`;
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
 `;
 
 const Home = () => (
@@ -104,17 +120,6 @@ const Login = (props) => {
           <Input type='password' />
         </div>
         <Button type='submit' primary=''>login</Button>
-        {/* <div>
-          <TextField label='username' />
-        </div>
-        <div>
-          <TextField label='password' type='password' />
-        </div>
-        <div>
-          <Button variant='contained' color='primary' type='submit'>
-            login
-          </Button>
-        </div> */}
       </form>
     </div>
   );
@@ -164,25 +169,17 @@ const App = () => {
     : null;
 
   return (
-    <Container>
+    <Page>
       {message && <Alert severity='success'>{message}</Alert>}
-      <AppBar position='static'>
-        <Toolbar>
-          <Button color='inherit' component={Link} to='/'>
-            home
-          </Button>
-          <Button color='inherit' component={Link} to='/notes'>
-            notes
-          </Button>
-          <Button color='inherit' component={Link} to='/users'>
-            users
-          </Button>
-          {user
-            ? <em>{user} logged in</em>
-            : <Button color='inherit' component={Link} to='/login'>login</Button>
-          }
-        </Toolbar>
-      </AppBar>
+      <Navigation>
+        <Link style={padding} to='/'>home</Link>
+        <Link style={padding} to='/notes'>notes</Link>
+        <Link style={padding} to='/users'>users</Link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link style={padding} to='/login'>login</Link>
+        }
+      </Navigation>
 
       <Switch>
         <Route exact path='/'>
@@ -202,11 +199,10 @@ const App = () => {
         </Route>
       </Switch>
 
-      <div>
-        <br />
+      <Footer>
         <em>Note app, Department of Computer Science 2021</em>
-      </div>
-    </Container>
+      </Footer>
+    </Page>
   );
 };
 
