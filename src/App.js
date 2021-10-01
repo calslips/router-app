@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Switch, Route, Link, Redirect, useHistory, useRouteMatch
 } from 'react-router-dom';
-// import { Table, Form, Button, Alert, Nav, Navbar } from 'react-bootstrap'
 import {
   Container,
   Button,
@@ -15,7 +14,6 @@ import {
   Paper,
   AppBar,
   Toolbar,
-  IconButton
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
@@ -147,7 +145,6 @@ const App = () => {
       {message && <Alert severity='success'>{message}</Alert>}
       <AppBar position='static'>
         <Toolbar>
-          <IconButton edge='start' color='inherit' aria-label='menu' ></IconButton>
           <Button color='inherit' component={Link} to='/'>
             home
           </Button>
