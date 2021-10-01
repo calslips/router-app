@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import {
   Container,
-  Button,
+  // Button,
   Table,
   TableBody,
   TableCell,
@@ -16,6 +16,20 @@ import {
   Toolbar,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`;
+
+const Input = styled.input`
+  margin: 0.25em;
+`;
 
 const Home = () => (
   <div>
@@ -82,6 +96,15 @@ const Login = (props) => {
       <h2>login</h2>
       <form onSubmit={onSubmit}>
         <div>
+          username:
+          <Input />
+        </div>
+        <div>
+          password:
+          <Input type='password' />
+        </div>
+        <Button type='submit' primary=''>login</Button>
+        {/* <div>
           <TextField label='username' />
         </div>
         <div>
@@ -91,7 +114,7 @@ const Login = (props) => {
           <Button variant='contained' color='primary' type='submit'>
             login
           </Button>
-        </div>
+        </div> */}
       </form>
     </div>
   );
